@@ -11,10 +11,12 @@ public class Task {
 
     public void mark() {
         this.done = true;
+        System.out.println("Nice! I've marked this task as done!\n" + this);
     }
 
     public void unmark() {
         this.done = false;
+        System.out.println("Okay! I've marked this task as not done!\n" + this);
     }
 
     public String getName() {
