@@ -1,21 +1,23 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 
 public class Deadline extends Task {
-    private String duedate;
+    private LocalDate duedate;
 
     public Deadline(String name, String duedate) {
         super(name);
-        this.duedate = duedate;
+        this.duedate = LocalDate.parse(duedate);
     }
 
     public Deadline(String name, boolean done, String duedate) {
         super(name, done);
-        this.duedate = duedate;
+        this.duedate = LocalDate.parse(duedate);
     }
 
     public String getDate() {
-        return this.duedate;
+        return this.duedate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
@@ -23,4 +25,7 @@ public class Deadline extends Task {
         return String.format("[D]%s by: %s", super.toString(), this.duedate);
     }
 
+    public String toString2() {
+        return String.format("[D]%s by: %s", super.toString(), this.getDate());
+    }
 }
