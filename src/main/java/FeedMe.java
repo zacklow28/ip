@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.*;
 
@@ -5,7 +6,7 @@ public class FeedMe {
     private static final ArrayList<Task> tasklist = new ArrayList<>();
 
     public static void delete(ArrayList<Task> tasklist, int index) {
-        System.out.println("Okay, I've swallowed this Food:\n" + tasklist.get(index));
+        System.out.println("Okay, I've swallowed this Food:\n" + tasklist.get(index).toString2());
         tasklist.remove(index);
     }
 
@@ -16,7 +17,7 @@ public class FeedMe {
     public static void printList(ArrayList<Task> tasklist) {
         System.out.println("Here are the Food in my tummy: ");
         for (int i = 1; i <= tasklist.size(); i++) {
-            System.out.println(i + ": " + tasklist.get(i - 1).toString());
+            System.out.println(i + ": " + tasklist.get(i - 1).toString2());
         }
     }
 
@@ -86,12 +87,13 @@ public class FeedMe {
     }
 
     public static void main(String[] args) throws IOException {
-        String greeting =  "Hello! I'm FeedMe.\nWhat can I do for you?\n";
-        String goodbye = "Munch. Hope to see you again soon!\n";
-        String invalidCommand = "Invalid/Missing Command! Feed me again!\n";
-        String invalidIndex = "Invalid/Missing Food Index! Feed me again!\n";
-        String invalidName = "Invalid/Missing Food Name! Feed me again!\n";
-        String invalidNameOrDate = "Invalid/Missing Food Name and/or Date! Feed me again!\n";
+        String greeting =  "Hello! I'm FeedMe.\nWhat can I do for you?";
+        String goodbye = "Munch. Hope to see you again soon!";
+        String invalidCommand = "Invalid/Missing Command! Feed me again!";
+        String invalidIndex = "Invalid/Missing Food Index! Feed me again!";
+        String invalidName = "Invalid/Missing Food Name! Feed me again!";
+        String invalidNameOrDate = "Invalid/Missing Food Name and/or Date! Feed me again!";
+        String invalidDate = "Invalid/Missing Date! Feed me again!";
 
         System.out.println(greeting);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -108,9 +110,13 @@ public class FeedMe {
                 initializeFile(filepath);
                 break;
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Food content corrupted! Feed me again!");
+                System.out.println("Invalid/Missing content! Feed me again!");
+                filepath = br.readLine();
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid/Missing Date! Feed me again!");
                 filepath = br.readLine();
             }
+
         }
         System.out.println("Tummy set!");
         String in = br.readLine();
@@ -130,7 +136,7 @@ public class FeedMe {
                     int index = Integer.parseInt(inArr[1]) - 1;
                     Task curr = tasklist.get(index);
                     curr.mark();
-                    System.out.println("Yay! I've marked this Food as eaten!\n" + curr);
+                    System.out.println("Yay! I've marked this Food as eaten!\n" + curr.toString2());
                     writeToFile(filepath, tasklist);
                 }
                 catch (IndexOutOfBoundsException e) {
@@ -144,7 +150,7 @@ public class FeedMe {
                     int index = Integer.parseInt(inArr[1]) - 1;
                     Task curr = tasklist.get(index);
                     curr.unmark();
-                    System.out.println("Aww! I've marked this Food as not eaten!\n" + curr);
+                    System.out.println("Aww! I've unmarked this Food as not eaten!\n" + curr.toString2());
                     writeToFile(filepath, tasklist);
                 }
                 catch (IndexOutOfBoundsException e) {
@@ -188,6 +194,11 @@ public class FeedMe {
                         in = br.readLine();
                         continue;
                     }
+                    catch (DateTimeParseException e) {
+                        System.out.println(invalidDate);
+                        in = br.readLine();
+                        continue;
+                    }
                 }
                 else if (inArr[0].equals("event")) {
                     try {
@@ -199,6 +210,11 @@ public class FeedMe {
                         in = br.readLine();
                         continue;
                     }
+                    catch (DateTimeParseException e) {
+                        System.out.println(invalidDate);
+                        in = br.readLine();
+                        continue;
+                    }
                 }
                 else {
                     System.out.println(invalidCommand);
@@ -206,7 +222,7 @@ public class FeedMe {
                     continue;
                 }
                 addTask(tasklist, curr);
-                System.out.println("Got it. I've added this Food:\n" + curr);
+                System.out.println("Got it. I've added this Food:\n" + curr.toString2());
                 appendToFile(filepath, curr);
                 printTotal(tasklist);
             }

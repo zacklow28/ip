@@ -15,4 +15,8 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String toString2() {
+        return "[T]" + super.toString();
+    }
 }
