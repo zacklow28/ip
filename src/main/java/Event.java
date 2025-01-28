@@ -11,6 +11,12 @@ public class Event extends Task {
         this.enddate = date.split(" /to ")[1];
     }
 
+    public Event(String name, boolean done, String date) {
+        super(name, done);
+        this.startdate = date.split(" /to ")[0];
+        this.enddate = date.split(" /to ")[1];
+    }
+
     public String getStartDate() {
         return this.startdate;
     }
@@ -21,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.startdate, this.enddate);
+        return String.format("[E]%s from: %s to: %s", super.toString(), this.startdate, this.enddate);
     }
 }

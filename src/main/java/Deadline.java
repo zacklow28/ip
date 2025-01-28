@@ -9,13 +9,18 @@ public class Deadline extends Task {
         this.duedate = duedate;
     }
 
+    public Deadline(String name, boolean done, String duedate) {
+        super(name, done);
+        this.duedate = duedate;
+    }
+
     public String getDate() {
         return this.duedate;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.duedate);
+        return String.format("[D]%s by: %s", super.toString(), this.duedate);
     }
 
 }

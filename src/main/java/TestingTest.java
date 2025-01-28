@@ -13,12 +13,12 @@ public class TestingTest {
    @Test
    public void TestDeadline() {
        //case 1
-       assertEquals("[D][ ] deadline return book (by: Sunday)", new Deadline("deadline return book", "Sunday").toString());
+       assertEquals("[D][ ] deadline return book by: Sunday", new Deadline("deadline return book", "Sunday").toString());
    }
 
    @Test
    public void TestEvent() {
        //case 1
-       assertEquals("[E][ ] event project meeting (from: Mon 2pm to: 4pm)", new Event("event project meeting", "Mon 2pm /to 4pm").toString());
+       assertEquals("[E][ ] event project meeting from: Mon 2pm to: 4pm", new Event("event project meeting", "Mon 2pm /to 4pm").toString());
    }
 }
