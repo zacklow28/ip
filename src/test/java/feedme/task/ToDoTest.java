@@ -11,5 +11,6 @@ public class ToDoTest {
     public void todo() {
         //case 1
         assertEquals("[T][ ] todo borrow book", new ToDo("todo borrow book").toString());
+        assertEquals("[T][ ] todo borrow book", new ToDo("todo borrow book").toString2());
     }
 }
