@@ -1,4 +1,4 @@
-package FeedMe.Task;
+package feedme.task;
 
 public class Task {
     private String name;
@@ -34,5 +34,6 @@ public class Task {
     //new format
     public String toString2() {
         String checkbox = this.done ? "[X] " : "[ ] ";
-        return checkbox + name;}
+        return checkbox + name;
+    }
 }

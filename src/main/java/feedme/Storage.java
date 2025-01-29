@@ -1,13 +1,17 @@
-package FeedMe;
+package feedme;
 
-import FeedMe.Task.Event;
-import FeedMe.Task.Task;
-import FeedMe.Task.Tasklist;
-import FeedMe.Task.ToDo;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
+
+import feedme.task.Event;
+import feedme.task.Task;
+import feedme.task.Tasklist;
+import feedme.task.ToDo;
 
 public class Storage {
     private String filepath;

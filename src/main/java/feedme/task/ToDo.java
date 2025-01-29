@@ -1,4 +1,4 @@
-package FeedMe.Task;
+package feedme.task;
 
 public class ToDo extends Task {
 

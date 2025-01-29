@@ -1,4 +1,4 @@
-package FeedMe.Task;
+package feedme.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

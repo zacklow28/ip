@@ -1,4 +1,4 @@
-Hello! I'm FeedMe.
+Hello! I'm feedme.
 What can I do for you?
 Tummy path (with extension) : 
 Tummy location not found.

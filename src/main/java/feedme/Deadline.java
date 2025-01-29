@@ -1,8 +1,9 @@
-package FeedMe;
+package feedme;
 
-import FeedMe.Task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import feedme.task.Task;
 
 public class Deadline extends Task {
     private LocalDate duedate;

@@ -1,7 +1,10 @@
-package FeedMe;
+package feedme;
 
-import FeedMe.Task.Tasklist;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import feedme.task.Tasklist;
 
 public class FeedMe {
     private static Tasklist tasklist = new Tasklist();

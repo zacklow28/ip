@@ -1,13 +1,13 @@
-package FeedMe.Task;
+package feedme.task;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Tasklist {
     private final ArrayList<Task> tasklist = new ArrayList<>();
 
     public void delete(int index) {
         System.out.println("Okay, I've digested this Food:\n" + this.getTask(index).toString2());
-       this.tasklist.remove(index);
+        this.tasklist.remove(index);
     }
 
     public void printTotal() {

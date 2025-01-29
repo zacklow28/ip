@@ -1,13 +1,16 @@
-package FeedMe;
+package feedme;
 
-import FeedMe.Task.Event;
-import FeedMe.Task.Task;
-import FeedMe.Task.Tasklist;
-import FeedMe.Task.ToDo;
-
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+
+import feedme.task.Event;
+import feedme.task.Task;
+import feedme.task.Tasklist;
+import feedme.task.ToDo;
+
+
 
 public class Ui {
 
@@ -66,13 +69,11 @@ public class Ui {
                 try {
                     ArrayList<String> result = Parser.parseTask(in);
                     curr = processTask(result);
-                }
-                catch (ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException e) {
                     String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
                     System.out.println(invalidNameOrFormat);
                     break;
-                }
-                catch (DateTimeParseException e) {
+                } catch (DateTimeParseException e) {
                     String invalidDate = "Invalid/Missing Date! Feed me again!";
                     System.out.println(invalidDate);
                     break;
@@ -94,12 +95,9 @@ public class Ui {
         Task curr;
         if (type.equals("todo")) {
             curr = new ToDo(result.get(1));
-        }
-        else if (type.equals("deadline")) {
+        } else if (type.equals("deadline")) {
             curr = new Deadline(result.get(1), result.get(2));
-        }
-        //event
-        else {
+        } else { //event
             curr = new Event(result.get(1), result.get(2), result.get(3));
         }
         return curr;

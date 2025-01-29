@@ -1,11 +1,11 @@
-package FeedMe;
+package feedme;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Parser {
 
     public static String parse(String in) {
-        String[] inArr = in.split(" ", 2);  //split just on the first space
+        String[] inArr = in.split(" ", 2); //split just on the first space
         if (in.equals("bye")) {
             return "goodbye";
         } else if (in.equals("list")) {
@@ -24,7 +24,7 @@ public class Parser {
     }
 
     public static int parseInt(String in) {
-        String[] inArr = in.split(" ", 2);  //split just on the first space
+        String[] inArr = in.split(" ", 2); //split just on the first space
         return Integer.parseInt(inArr[1]) - 1;
     }
 
@@ -46,5 +46,5 @@ public class Parser {
             outArr.add(input.split(" /to ")[1]);
         }
         return outArr;
-    }    //split just on the first space
+    }
 }

@@ -1,0 +1,15 @@
+package feedme;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import feedme.task.ToDo;
+
+public class DeadlineTest {
+    @Test
+    public void todo() {
+        //case 1
+        assertEquals("[T][ ] todo borrow book", new Deadline("").toString());
+    }
+}
