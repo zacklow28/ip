@@ -32,6 +32,7 @@ public class Event extends Task {
         return String.format("[E]%s from: %s to: %s", super.toString(), this.startdate, this.enddate);
     }
 
+    //new format
     public String toString2() {
         return String.format("[E]%s from: %s to: %s", super.toString(), this.getStartDate(), this.getEndDate());
     }
