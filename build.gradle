@@ -37,7 +37,8 @@ checkstyle {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    mainClassName = "feedme.FeedMe"
+    archiveBaseName = "feedme"
     archiveClassifier = null
 }
 
