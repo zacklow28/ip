@@ -1,4 +1,4 @@
-# FeedMe User Guide
+# FeedMe.FeedMe User Guide
 
 // Update the title above to match the actual product name
 

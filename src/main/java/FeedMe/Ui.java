@@ -1,3 +1,10 @@
+package FeedMe;
+
+import FeedMe.Task.Event;
+import FeedMe.Task.Task;
+import FeedMe.Task.Tasklist;
+import FeedMe.Task.ToDo;
+
 import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.*;
@@ -15,7 +22,7 @@ public class Ui {
             String command = Parser.parse(in);
             String goodbye = "Munch. Hope to see you again soon!";
             String invalidCommand = "Invalid/Missing Command! Feed me again!";
-            String invalidIndex = "Invalid/Missing Food Index! Feed me again!";
+            String invalidIndex = "Invalid/Missing Index! Feed me again!";
             switch (command) {
             case "goodbye":
                 System.out.println(goodbye);
@@ -61,7 +68,7 @@ public class Ui {
                     curr = processTask(result);
                 }
                 catch (ArrayIndexOutOfBoundsException e) {
-                    String invalidNameOrFormat = "Invalid/Missing Food Name or Format! Feed me again!";
+                    String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
                     System.out.println(invalidNameOrFormat);
                     break;
                 }

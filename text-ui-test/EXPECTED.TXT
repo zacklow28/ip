@@ -1,7 +1,53 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm FeedMe.
+What can I do for you?
+Tummy path (with extension) : 
+Tummy location not found.
+Created a new stomach at: Output.txt
+Tummy set!
+Got it. I've added this Food:
+[T][ ] borrow book
+Now you have 1 Food in my tummy.
+Invalid/Missing Parameter or Format! Feed me again!
+Got it. I've added this Food:
+[D][ ] return book by: Jan 01 2001
+Now you have 2 Food in my tummy.
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Date! Feed me again!
+Got it. I've added this Food:
+[E][ ] sell book from: Jan 01 2001 to: Jan 02 2001
+Now you have 3 Food in my tummy.
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Parameter or Format! Feed me again!
+Invalid/Missing Date! Feed me again!
+Yay! I've marked this Food as eaten!
+[T][X] borrow book
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Aww! I've unmarked this Food as not eaten!
+[T][ ] borrow book
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Here are the Food in my tummy: 
+1: [T][ ] borrow book
+2: [D][ ] return book by: Jan 01 2001
+3: [E][ ] sell book from: Jan 01 2001 to: Jan 02 2001
+Invalid/Missing Command! Feed me again!
+Invalid/Missing Command! Feed me again!
+Okay, I've digested this Food:
+[T][ ] borrow book
+Now you have 2 Food in my tummy.
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Index! Feed me again!
+Invalid/Missing Command! Feed me again!
+Munch. Hope to see you again soon!
