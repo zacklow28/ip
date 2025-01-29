@@ -32,6 +32,7 @@ public class Task {
         return checkbox + name;
     }
 
+    //new format
     public String toString2() {
         String checkbox = this.done ? "[X] " : "[ ] ";
         return checkbox + name;}

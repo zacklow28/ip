@@ -16,6 +16,7 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    //new format
     public String toString2() {
         return "[T]" + super.toString();
     }

@@ -19,6 +19,12 @@ public class Event extends Task {
         this.enddate = LocalDate.parse(date.split(" /to ")[1]);
     }
 
+    public Event(String name, String startdate, String enddate) {
+        super(name);
+        this.startdate = LocalDate.parse(startdate);
+        this.enddate = LocalDate.parse(enddate);
+    }
+
     public String getStartDate() {
         return this.startdate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -32,6 +38,7 @@ public class Event extends Task {
         return String.format("[E]%s from: %s to: %s", super.toString(), this.startdate, this.enddate);
     }
 
+    //new format
     public String toString2() {
         return String.format("[E]%s from: %s to: %s", super.toString(), this.getStartDate(), this.getEndDate());
     }

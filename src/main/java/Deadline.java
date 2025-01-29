@@ -25,6 +25,7 @@ public class Deadline extends Task {
         return String.format("[D]%s by: %s", super.toString(), this.duedate);
     }
 
+    //new format
     public String toString2() {
         return String.format("[D]%s by: %s", super.toString(), this.getDate());
     }
