@@ -1,5 +1,6 @@
+package FeedMe;
+
 import java.util.*;
-import java.io.*;
 
 public class Parser {
 

@@ -1,5 +1,9 @@
-import org.junit.jupiter.api.Test;
+package FeedMe.Test;
 
+import FeedMe.Deadline;
+import FeedMe.Task.Event;
+import FeedMe.Task.ToDo;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestingTest {
