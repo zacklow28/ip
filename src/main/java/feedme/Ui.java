@@ -11,13 +11,27 @@ import feedme.task.Task;
 import feedme.task.Tasklist;
 import feedme.task.ToDo;
 
+/**
+ * Ui class that deals with interactions with the user
+ */
 public class Ui {
 
+    /**
+     * Prints a greeting message to the user
+     */
     public void greet() {
         String greeting = "Hello! I'm FeedMe.\nWhat can I do for you?";
         System.out.println(greeting);
     }
 
+    /**
+     * Processes the user input to update the tasklist
+     * @param in user input to be passed to the parser
+     * @param tasklist tasklist to be updated
+     * @param storage storage for reading from and writing to file
+     * @param br buffer reader for reading user input
+     * @throws IOException if input cannot be read
+     */
     public void process(String in, Tasklist tasklist, Storage storage, BufferedReader br) throws IOException {
         Task curr;
         while (in != null) {
@@ -89,6 +103,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Processes the user input that includes a type of task into a task object
+     * @param result user input
+     * @return Task task to be added into the tasklist
+     * @throws ArrayIndexOutOfBoundsException if the input is invalid
+     * @throws DateTimeParseException if the date is invalid
+     */
     public Task processTask(ArrayList<String> result) throws ArrayIndexOutOfBoundsException, DateTimeParseException {
         String type = result.get(0);
         Task curr;
