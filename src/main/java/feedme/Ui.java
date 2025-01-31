@@ -25,6 +25,7 @@ public class Ui {
             String goodbye = "Munch. Hope to see you again soon!";
             String invalidCommand = "Invalid/Missing Command! Feed me again!";
             String invalidIndex = "Invalid/Missing Index! Feed me again!";
+            String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
             switch (command) {
             case "goodbye":
                 System.out.println(goodbye);
@@ -64,12 +65,19 @@ public class Ui {
                     System.out.println(invalidIndex);
                 }
                 break;
+            case "find":
+                try {
+                    String name = Parser.parseName(in);
+                    findTask(name, tasklist);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(invalidNameOrFormat);
+                }
+                break;
             case "task":
                 try {
                     ArrayList<String> result = Parser.parseTask(in);
                     curr = processTask(result);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
                     System.out.println(invalidNameOrFormat);
                     break;
                 } catch (DateTimeParseException e) {
@@ -100,5 +108,20 @@ public class Ui {
             curr = new Event(result.get(1), result.get(2), result.get(3));
         }
         return curr;
+    }
+
+    public void findTask(String in, Tasklist tasklist) {
+        System.out.println("Finding...");
+        Tasklist tasklist2 = new Tasklist();
+        for (Task t : tasklist.getList()) {
+            if (t.getName().contains(in)) {
+                tasklist2.addTask(t);
+            }
+        }
+        if (tasklist2.getSize() == 0) {
+            System.out.println("No matches found in my tummy!");
+        } else {
+            tasklist2.printList();
+        }
     }
 }
