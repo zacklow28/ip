@@ -40,6 +40,7 @@ public class Event extends Task {
 
     //new format
     public String toString2() {
-        return String.format("[E]%s from: %s to: %s", super.toString(), this.getStartDate(), this.getEndDate());
+        return String.format("[E]%s from: %s to: %s", super.toString(),
+                                this.getStartDate(), this.getEndDate());
     }
 }
