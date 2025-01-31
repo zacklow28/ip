@@ -26,6 +26,8 @@ public class Parser {
             return "delete";
         } else if (inArr[0].equals("todo") || inArr[0].equals("deadline") || inArr[0].equals("event")) {
             return "task";
+        } else if (inArr[0].equals("find")) {
+            return "find";
         } else {
             return "invalid";
         }
@@ -39,6 +41,16 @@ public class Parser {
     public static int parseInt(String in) {
         String[] inArr = in.split(" ", 2); //split just on the first space
         return Integer.parseInt(inArr[1]) - 1;
+    }
+
+    /**
+     * Parses user input that includes the name into the task name
+     * @param in user input
+     * @return String name
+     */
+    public static String parseName(String in) {
+        String[] inArr = in.split(" "); //split just on the first space
+        return inArr[1];
     }
 
     /**
