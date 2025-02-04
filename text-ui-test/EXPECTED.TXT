@@ -1,4 +1,4 @@
-Hello! I'm feedme.
+Hello! I'm FeedMe.
 What can I do for you?
 Tummy path (with extension) : 
 Tummy location not found.
@@ -29,6 +29,8 @@ Invalid/Missing Parameter or Format! Feed me again!
 Invalid/Missing Date! Feed me again!
 Yay! I've marked this Food as eaten!
 [T][X] borrow book
+Yay! I've marked this Food as eaten!
+[D][X] return book by: Jan 01 2001
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
@@ -39,7 +41,7 @@ Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
 Here are the Food in my tummy: 
 1: [T][ ] borrow book
-2: [D][ ] return book by: Jan 01 2001
+2: [D][X] return book by: Jan 01 2001
 3: [E][ ] sell book from: Jan 01 2001 to: Jan 02 2001
 Invalid/Missing Command! Feed me again!
 Invalid/Missing Command! Feed me again!
@@ -49,5 +51,16 @@ Now you have 2 Food in my tummy.
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
+Invalid/Missing Command! Feed me again!
+Finding...
+Here are the Food in my tummy: 
+1: [D][X] return book by: Jan 01 2001
+2: [E][ ] sell book from: Jan 01 2001 to: Jan 02 2001
+Finding...
+Here are the Food in my tummy: 
+1: [D][X] return book by: Jan 01 2001
+Finding...
+No matches found in my tummy!
+Invalid/Missing Parameter or Format! Feed me again!
 Invalid/Missing Command! Feed me again!
 Munch. Hope to see you again soon!
