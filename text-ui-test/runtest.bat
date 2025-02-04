@@ -19,7 +19,7 @@ IF ERRORLEVEL 1 (
 REM No error here, errorlevel == 0
 
 REM Run the program, feed commands from input.txt and redirect the output to ACTUAL.TXT
-java -classpath ..\bin feedme.feedme < input.txt > ACTUAL.TXT
+java -classpath ..\bin feedme.FeedMe < input.txt > ACTUAL.TXT
 
 REM Compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

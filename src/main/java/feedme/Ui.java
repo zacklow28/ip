@@ -32,7 +32,8 @@ public class Ui {
      * @param br buffer reader for reading user input
      * @throws IOException if input cannot be read
      */
-    public void process(String in, Tasklist tasklist, Storage storage, BufferedReader br) throws IOException {
+    public void respondToUserBasedOnCommand(String in, Tasklist tasklist, Storage storage, BufferedReader br)
+            throws IOException {
         Task curr;
         while (in != null) {
             String command = Parser.parse(in);
@@ -82,7 +83,7 @@ public class Ui {
             case "find":
                 try {
                     String name = Parser.parseName(in);
-                    findTask(name, tasklist);
+                    findTaskAndRespond(name, tasklist);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(invalidNameOrFormat);
                 }
@@ -90,7 +91,7 @@ public class Ui {
             case "task":
                 try {
                     ArrayList<String> result = Parser.parseTask(in);
-                    curr = processTask(result);
+                    curr = returnTaskObject(result);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(invalidNameOrFormat);
                     break;
@@ -118,7 +119,8 @@ public class Ui {
      * @throws ArrayIndexOutOfBoundsException if the input is invalid
      * @throws DateTimeParseException if the date is invalid
      */
-    public Task processTask(ArrayList<String> result) throws ArrayIndexOutOfBoundsException, DateTimeParseException {
+    public Task returnTaskObject(ArrayList<String> result)
+            throws ArrayIndexOutOfBoundsException, DateTimeParseException {
         String type = result.get(0);
         Task curr;
         if (type.equals("todo")) {
@@ -131,7 +133,12 @@ public class Ui {
         return curr;
     }
 
-    public void findTask(String in, Tasklist tasklist) {
+    /**
+     * Searches for a tasks in the tasklist that matches input
+     * @param in user input
+     * @param tasklist tasklist to be searched
+     */
+    public void findTaskAndRespond(String in, Tasklist tasklist) {
         System.out.println("Finding...");
         Tasklist tasklist2 = new Tasklist();
         for (Task t : tasklist.getList()) {

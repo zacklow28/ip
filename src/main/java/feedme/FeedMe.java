@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 
 import feedme.task.Tasklist;
 
+/**
+ * Main class for FeedMe
+ */
 public class FeedMe {
     private static Tasklist tasklist = new Tasklist();
     private static Storage storage = new Storage();
@@ -16,7 +19,7 @@ public class FeedMe {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         storage.set(tasklist, br);
         String in = br.readLine();
-        ui.process(in, tasklist, storage, br);
+        ui.respondToUserBasedOnCommand(in, tasklist, storage, br);
         br.close();
     }
 }

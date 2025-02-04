@@ -17,6 +17,7 @@ event /from 2001-01-01 /to 2001-01-02
 event /from Thursday /to Friday
 event sell book /from Thursday /to Friday
 mark 1
+mark 2
 mark 
 mark one
 mark 200
@@ -32,4 +33,9 @@ delete
 delete one
 delete 200
 print
+find book
+find return
+find two
+find
+finding one
 bye
