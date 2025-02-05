@@ -25,13 +25,14 @@ public class Storage {
      * @param filePath The path of the file
      * @throws IOException if the file cannot be created
      */
-    public void initialize(String filePath) throws IOException {
+    public String initialize(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("Created a new stomach at: " + filePath);
+            return "Created a new stomach at: " + filePath;
         }
         this.filePath = filePath;
+        return "found";
     }
 
     /**
@@ -86,7 +87,7 @@ public class Storage {
      * @param br The bufferedReader to read from
      * @throws IOException if the file cannot be read
      */
-    public void set(TaskList taskList, BufferedReader br) throws IOException {
+    public void setUsingBufferedReader(TaskList taskList, BufferedReader br) throws IOException {
         System.out.println("Tummy path (with extension) : ");
         String filePath = br.readLine();
         //read from file
@@ -108,6 +109,33 @@ public class Storage {
 
         }
         System.out.println("Tummy set!");
+    }
+
+    /**
+     * Sets the stomach. Reads from a file and either retrieves past tasks or creates a new stomach for the user
+     * @param taskList The taskList to add tasks to
+     * @param string The path of the file
+     * @throws IOException if the file cannot be read
+     */
+    public String setUsingString(TaskList taskList, String string) throws IOException {
+        //read from file
+        if (string != null) {
+            try {
+                this.retrieveFrom(taskList, string);
+            } catch (FileNotFoundException e) {
+                String output = "Tummy location not found.";
+                String init = this.initialize(string);
+                if (!init.equals("found")) {
+                    return output + "\n" + init;
+                }
+            } catch (IndexOutOfBoundsException e) {
+                return "Invalid/Missing content! Feed me again!";
+            } catch (DateTimeParseException e) {
+                return "Invalid/Missing Date! Feed me again!";
+            }
+
+        }
+        return "Tummy set!";
     }
 
     /**
