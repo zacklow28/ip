@@ -85,8 +85,8 @@ public class Ui {
             }
         case "find":
             try {
-                String name = Parser.parseInputToName(in);
-                return findTaskAndRespond(name, taskList);
+                String[] names = in.split(" ");
+                return findTaskAndRespond(taskList, names);
             } catch (ArrayIndexOutOfBoundsException e) {
                 return invalidNameOrFormat;
             }
@@ -145,14 +145,16 @@ public class Ui {
 
     /**
      * Searches for a tasks in the tasklist that matches input
-     * @param in user input
      * @param taskList tasklist to be searched
+     * @param in user inputs
      */
-    public String findTaskAndRespond(String in, TaskList taskList) {
+    public String findTaskAndRespond(TaskList taskList, String... in) {
         TaskList newTaskList = new TaskList();
         for (Task t : taskList.getListOfTasks()) {
-            if (t.getName().contains(in)) {
-                newTaskList.addTask(t);
+            for (int i = 1; i < in.length; i++) { //start from 1 to skip the "find" command
+                if (t.getName().contains(in[i])) {
+                    newTaskList.addTask(t);
+                }
             }
         }
         if (newTaskList.getSize() == 0) {
