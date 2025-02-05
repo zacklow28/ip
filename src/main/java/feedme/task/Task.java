@@ -5,8 +5,12 @@ package feedme.task;
  */
 public class Task {
     private String name;
-    private Boolean done = false;
+    private Boolean isDone = false;
 
+    /**
+     * Constructor
+     * @param name name of task
+     */
     public Task(String name) {
         this.name = name;
     }
@@ -14,25 +18,25 @@ public class Task {
     /**
      * Constructor
      * @param name name of task
-     * @param done if task is done
+     * @param isDone if task is done
      */
-    public Task(String name, Boolean done) {
+    public Task(String name, Boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
      * Marks the task. Sets done to true
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Unmarks the task. Sets done to false
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -49,7 +53,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String checkbox = this.done ? "[X] " : "[ ] ";
+        String checkbox = this.isDone ? "[X] " : "[ ] ";
         return checkbox + name;
     }
 
@@ -57,9 +61,8 @@ public class Task {
      * Returns task in format "[ ] name"
      * @return String representation
      */
-    //new format
-    public String toString2() {
-        String checkbox = this.done ? "[X] " : "[ ] ";
+    public String toNewFormat() {
+        String checkbox = this.isDone ? "[X] " : "[ ] ";
         return checkbox + name;
     }
 }

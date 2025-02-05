@@ -11,66 +11,66 @@ import java.util.Scanner;
 import feedme.task.Deadline;
 import feedme.task.Event;
 import feedme.task.Task;
-import feedme.task.Tasklist;
+import feedme.task.TaskList;
 import feedme.task.ToDo;
 
 /**
  * Storage class that deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private String filepath;
+    private String filePath;
 
     /**
      * Initializes a new stomach. Creates a new file if it doesn't exist
-     * @param filepath The path of the file
+     * @param filePath The path of the file
      * @throws IOException if the file cannot be created
      */
-    public void initialize(String filepath) throws IOException {
-        File file = new File(filepath);
+    public void initialize(String filePath) throws IOException {
+        File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("Created a new stomach at: " + filepath);
+            System.out.println("Created a new stomach at: " + filePath);
         }
-        this.filepath = filepath;
+        this.filePath = filePath;
     }
 
     /**
      * Retrieves tasks from a file
-     * @param tasklist The tasklist to add tasks to
-     * @param filepath The path of the file
+     * @param taskList The taskList to add tasks to
+     * @param filePath The path of the file
      * @throws IOException if the file cannot be read
      */
-    public void retrieveFrom(Tasklist tasklist, String filepath) throws IOException {
-        File file = new File(filepath);
-        this.filepath = filepath;
+    public void retrieveFrom(TaskList taskList, String filePath) throws IOException {
+        File file = new File(filePath);
+        this.filePath = filePath;
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            line = line.replace("to:", "/to");
-            char taskType = line.charAt(1);
-            String food = line.substring(7).trim(); //exclude the [ ][ ]
+            String lineInFile = scanner.nextLine();
+            lineInFile = lineInFile.replace("to:", "/to");
+            char taskType = lineInFile.charAt(1);
+            String food = lineInFile.substring(7).trim(); //exclude the [ ][ ]
             switch (taskType) {
             case 'T':
-                if (line.contains("[X]")) {
-                    tasklist.addTask(new ToDo(food, true));
+                if (lineInFile.contains("[X]")) {
+                    taskList.addTask(new ToDo(food, true));
                 } else {
-                    tasklist.addTask(new ToDo(food));
+                    taskList.addTask(new ToDo(food));
                 }
                 break;
             case 'D':
                 String[] foodArr = food.split(" by: ");
-                if (line.contains("[X]")) {
-                    tasklist.addTask(new Deadline(foodArr[0], true, foodArr[1]));
+                if (lineInFile.contains("[X]")) {
+                    taskList.addTask(new Deadline(foodArr[0], true, foodArr[1]));
                 } else {
-                    tasklist.addTask(new Deadline(foodArr[0], foodArr[1]));
+                    taskList.addTask(new Deadline(foodArr[0], foodArr[1]));
                 }
                 break;
             case 'E':
                 String[] foodArr2 = food.split(" from: ");
-                if (line.contains("[X]")) {
-                    tasklist.addTask(new Event(foodArr2[0], true, foodArr2[1]));
+                if (lineInFile.contains("[X]")) {
+                    taskList.addTask(new Event(foodArr2[0], true, foodArr2[1]));
                 } else {
-                    tasklist.addTask(new Event(foodArr2[0], foodArr2[1]));
+                    taskList.addTask(new Event(foodArr2[0], foodArr2[1]));
                 }
                 break;
             default:
@@ -82,28 +82,28 @@ public class Storage {
 
     /**
      * Sets the stomach. Reads from a file and either retrieves past tasks or creates a new stomach for the user
-     * @param tasklist The tasklist to add tasks to
+     * @param taskList The taskList to add tasks to
      * @param br The bufferedReader to read from
      * @throws IOException if the file cannot be read
      */
-    public void set(Tasklist tasklist, BufferedReader br) throws IOException {
+    public void set(TaskList taskList, BufferedReader br) throws IOException {
         System.out.println("Tummy path (with extension) : ");
-        String filepath = br.readLine();
+        String filePath = br.readLine();
         //read from file
-        while (filepath != null) {
+        while (filePath != null) {
             try {
-                this.retrieveFrom(tasklist, filepath);
+                this.retrieveFrom(taskList, filePath);
                 break;
             } catch (FileNotFoundException e) {
                 System.out.println("Tummy location not found.");
-                this.initialize(filepath);
+                this.initialize(filePath);
                 break;
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Invalid/Missing content! Feed me again!");
-                filepath = br.readLine();
+                filePath = br.readLine();
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid/Missing Date! Feed me again!");
-                filepath = br.readLine();
+                filePath = br.readLine();
             }
 
         }
@@ -112,23 +112,23 @@ public class Storage {
 
     /**
      * Appends a task to the stomach. Writes to the end of the file
-     * @param curr The task to append
+     * @param task The task to append
      * @throws IOException if the file cannot be written to
      */
-    public void append(Task curr) throws IOException {
-        FileWriter fw = new FileWriter(this.filepath, true);
-        fw.write(curr.toString() + "\n");
+    public void append(Task task) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath, true);
+        fw.write(task.toString() + "\n");
         fw.close();
     }
 
     /**
-     * Writes the tasklist to the stomach. Overwrites the file
-     * @param tasklist The tasklist to write
+     * Writes the taskList to the stomach. Overwrites the file
+     * @param taskList The taskList to write
      * @throws IOException if the file cannot be written to
      */
-    public void write(Tasklist tasklist) throws IOException {
-        FileWriter fw = new FileWriter(this.filepath);
-        for (Task t : tasklist.getList()) {
+    public void write(TaskList taskList) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath);
+        for (Task t : taskList.getListOfTasks()) {
             fw.write(t.toString() + "\n");
         }
         fw.close();

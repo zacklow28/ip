@@ -16,14 +16,14 @@ public class ToDo extends Task {
     /**
      * Constructor
      * @param name name of task
-     * @param done if task is done
+     * @param isDone if task is done
      */
-    public ToDo(String name, boolean done) {
-        super(name, done);
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     /**
-     * Returns string in format "[T]name"
+     * Returns string in format "[T][ ] name"
      * @return String representation
      */
     @Override
@@ -32,11 +32,11 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns string in format "[T]name"
+     * Returns string in format "[T][ ] name"
      * @return String representation
      */
     //new format
-    public String toString2() {
+    public String toNewFormat() {
         return "[T]" + super.toString();
     }
 }

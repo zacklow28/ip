@@ -12,12 +12,12 @@ public class Parser {
      * @param in user input
      * @return String command
      */
-    public static String parse(String in) {
+    public static String parseInputToCommand(String in) {
         String[] inArr = in.split(" ", 2); //split just on the first space
         if (in.equals("bye")) {
             return "goodbye";
         } else if (in.equals("list")) {
-            return "printlist";
+            return "list";
         } else if (inArr[0].equals("mark")) {
             return "mark";
         } else if (inArr[0].equals("unmark")) {
@@ -38,7 +38,7 @@ public class Parser {
      * @param in user input
      * @return int index
      */
-    public static int parseInt(String in) {
+    public static int parseInputToIndex(String in) {
         String[] inArr = in.split(" ", 2); //split just on the first space
         return Integer.parseInt(inArr[1]) - 1;
     }
@@ -48,7 +48,7 @@ public class Parser {
      * @param in user input
      * @return String name
      */
-    public static String parseName(String in) {
+    public static String parseInputToName(String in) {
         String[] inArr = in.split(" "); //split just on the first space
         return inArr[1];
     }
@@ -56,9 +56,9 @@ public class Parser {
     /**
      * Parses user input that includes a type of task into an array list
      * @param in user input
-     * @return ArrayList of strings, each string is a part of the task. [0] is type of task, [1] is the name
+     * @return ArrayList of strings, each string is a part of the task. [0] is type of task, [1] is the name etc.
      */
-    public static ArrayList<String> parseTask(String in) {
+    public static ArrayList<String> parseInputToArrayOfTaskParameters(String in) {
         String[] inArr = in.split(" ", 2);
         ArrayList<String> outArr = new ArrayList<String>();
         if (inArr[0].equals("todo")) {

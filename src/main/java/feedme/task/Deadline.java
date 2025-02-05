@@ -4,30 +4,30 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline inherits from Task. Has a duedate
+ * Deadline inherits from Task. Has a dueDate
  */
 public class Deadline extends Task {
-    private LocalDate duedate;
+    private LocalDate dueDate;
 
     /**
      *  Constructor
      * @param name name of task
-     * @param duedate date of task
+     * @param dueDate date of task
      */
-    public Deadline(String name, String duedate) {
+    public Deadline(String name, String dueDate) {
         super(name);
-        this.duedate = LocalDate.parse(duedate);
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     /**
      *  Constructor with done
      * @param name name of task
-     * @param done if task is done
-     * @param duedate date of task
+     * @param isDone if task is done
+     * @param dueDate date of task
      */
-    public Deadline(String name, boolean done, String duedate) {
-        super(name, done);
-        this.duedate = LocalDate.parse(duedate);
+    public Deadline(String name, boolean isDone, String dueDate) {
+        super(name, isDone);
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      *  @return String date
      */
     public String getDate() {
-        return this.duedate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     /**
@@ -44,7 +44,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s by: %s", super.toString(), this.duedate);
+        return String.format("[D]%s by: %s", super.toString(), this.dueDate);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Deadline extends Task {
      * @return String representation
      */
     //new format
-    public String toString2() {
+    public String toNewFormat() {
         return String.format("[D]%s by: %s", super.toString(), this.getDate());
     }
 }
