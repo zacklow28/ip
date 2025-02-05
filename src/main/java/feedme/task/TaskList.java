@@ -12,9 +12,10 @@ public class TaskList {
      * Deletes a task from the Collection
      * @param index The index of the task, start from 0
      */
-    public void deleteTask(int index) {
-        System.out.println("Okay, I've digested this Food:\n" + this.getTask(index).toNewFormat());
+    public String deleteTask(int index) {
+        String output = "Okay, I've digested this Food:\n" + this.getTask(index).toNewFormat();
         this.tasks.remove(index);
+        return output;
     }
 
     /**
@@ -25,6 +26,13 @@ public class TaskList {
     }
 
     /**
+     * Prints the total number of tasks
+     */
+    public String getTotalTasks() {
+        return String.format("Now you have %s Food in my tummy.\n", this.getSize());
+    }
+
+    /**
      * Prints a string of the list of tasks
      */
     public void printListOfTasks() {
@@ -32,6 +40,15 @@ public class TaskList {
         for (int i = 1; i <= this.getSize(); i++) {
             System.out.println(i + ": " + this.tasks.get(i - 1).toNewFormat());
         }
+    }
+
+    @Override
+    public String toString() {
+        String output = "Here are the Food in my tummy: ";
+        for (int i = 1; i <= this.getSize(); i++) {
+            output = output.concat("\n" + i + ": " + this.tasks.get(i - 1).toNewFormat());
+        }
+        return output;
     }
 
     /**

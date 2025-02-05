@@ -39,6 +39,7 @@ public class Ui {
         String invalidCommand = "Invalid/Missing Command! Feed me again!";
         String invalidIndex = "Invalid/Missing Index! Feed me again!";
         String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
+        String invalidInput = "Invalid/Missing Input! Feed me again!";
 
         switch (command) {
         case "goodbye":
@@ -55,6 +56,8 @@ public class Ui {
                 return output;
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return invalidIndex;
+            } catch (IOException e) {
+                return invalidInput;
             }
         case "unmark":
             try {
@@ -66,6 +69,8 @@ public class Ui {
                 return output;
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return invalidIndex;
+            } catch (IOException e) {
+                return invalidInput;
             }
         case "delete":
             try {
@@ -75,6 +80,8 @@ public class Ui {
                 return output + "\n" + taskList.getTotalTasks();
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return invalidIndex;
+            } catch (IOException e) {
+                return invalidInput;
             }
         case "find":
             try {

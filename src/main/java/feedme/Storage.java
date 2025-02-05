@@ -26,13 +26,17 @@ public class Storage {
      * @throws IOException if the file cannot be created
      */
     public String initialize(String filePath) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-            return "Created a new stomach at: " + filePath;
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                return "Created a new stomach at: " + filePath;
+            }
+            this.filePath = filePath;
+            return "found";
+        } catch (IOException e) {
+            return "Invalid input! Feed me again!";
         }
-        this.filePath = filePath;
-        return "found";
     }
 
     /**
@@ -132,6 +136,8 @@ public class Storage {
                 return "Invalid/Missing content! Feed me again!";
             } catch (DateTimeParseException e) {
                 return "Invalid/Missing Date! Feed me again!";
+            } catch (IOException e) {
+                return "Invalid input! Feed me again!";
             }
 
         }

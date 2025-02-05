@@ -15,7 +15,7 @@ public class FeedMe {
     private static Ui ui = new Ui();
 
     public static void main(String[] args) throws IOException {
-        ui.greet();
+        System.out.println(ui.greet());
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         storage.setUsingBufferedReader(taskList, br);
         ui.loopAndRespond(br, taskList, storage);
