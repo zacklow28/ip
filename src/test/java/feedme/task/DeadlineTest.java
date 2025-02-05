@@ -13,6 +13,6 @@ public class DeadlineTest {
         assertEquals("[D][ ] deadline return book by: 2007-12-03",
                 new Deadline("deadline return book", "2007-12-03").toString());
         assertEquals("[D][ ] deadline return book by: Dec 03 2007",
-                new Deadline("deadline return book", "2007-12-03").toString2());
+                new Deadline("deadline return book", "2007-12-03").toNewFormat());
     }
 }

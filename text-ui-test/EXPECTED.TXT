@@ -34,7 +34,7 @@ Yay! I've marked this Food as eaten!
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
-Aww! I've unmarked this Food as not eaten!
+Okay! I've unmarked this Food as not eaten!
 [T][ ] borrow book
 Invalid/Missing Index! Feed me again!
 Invalid/Missing Index! Feed me again!
