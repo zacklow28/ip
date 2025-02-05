@@ -18,8 +18,7 @@ public class FeedMe {
         ui.greet();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         storage.set(taskList, br);
-        String in = br.readLine();
-        ui.respondToUserBasedOnCommand(in, taskList, storage, br);
+        ui.loopAndRespond(br, taskList, storage);
         br.close();
     }
 }

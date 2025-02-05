@@ -25,89 +25,100 @@ public class Ui {
     }
 
     /**
-     * Processes the user input to update the taskList
-     * @param in user input to be passed to the parser
-     * @param taskList taskList to be updated
-     * @param storage storage for reading from and writing to file
-     * @param br buffer reader for reading user input
-     * @throws IOException if input cannot be read
+     * Handle the command logic for each individual input and respond to the user
+     * @param in user input
+     * @param taskList taskList to be modified
+     * @param storage storage to be modified
+     * @throws IOException if the file cannot be written to
      */
-    public void respondToUserBasedOnCommand(String in, TaskList taskList, Storage storage, BufferedReader br)
-            throws IOException {
+    public void handleCommand(String in, TaskList taskList, Storage storage) throws IOException {
         Task task;
-        while (in != null) {
-            String command = Parser.parseInputToCommand(in);
-            String goodbye = "Munch. Hope to see you again soon!";
-            String invalidCommand = "Invalid/Missing Command! Feed me again!";
-            String invalidIndex = "Invalid/Missing Index! Feed me again!";
-            String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
-            switch (command) {
-            case "goodbye":
-                System.out.println(goodbye);
-                return;
-            case "list":
-                taskList.printListOfTasks();
-                break;
-            case "mark":
-                try {
-                    int index = Parser.parseInputToIndex(in);
-                    task = taskList.getTask(index);
-                    task.mark();
-                    System.out.println("Yay! I've marked this Food as eaten!\n" + task.toNewFormat());
-                    storage.write(taskList);
-                } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println(invalidIndex);
-                }
-                break;
-            case "unmark":
-                try {
-                    int index = Parser.parseInputToIndex(in);
-                    task = taskList.getTask(index);
-                    task.unmark();
-                    System.out.println("Okay! I've unmarked this Food as not eaten!\n" + task.toNewFormat());
-                    storage.write(taskList);
-                } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println(invalidIndex);
-                }
-                break;
-            case "delete":
-                try {
-                    int index = Parser.parseInputToIndex(in);
-                    taskList.deleteTask(index);
-                    taskList.printTotalTasks();
-                    storage.write(taskList);
-                } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println(invalidIndex);
-                }
-                break;
-            case "find":
-                try {
-                    String name = Parser.parseInputToName(in);
-                    findTaskAndRespond(name, taskList);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(invalidNameOrFormat);
-                }
-                break;
-            case "task":
-                try {
-                    ArrayList<String> result = Parser.parseInputToArrayOfTaskParameters(in);
-                    task = returnTaskObject(result);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(invalidNameOrFormat);
-                    break;
-                } catch (DateTimeParseException e) {
-                    String invalidDate = "Invalid/Missing Date! Feed me again!";
-                    System.out.println(invalidDate);
-                    break;
-                }
-                taskList.addTask(task);
-                System.out.println("Got it. I've added this Food:\n" + task.toNewFormat());
-                storage.append(task);
-                taskList.printTotalTasks();
-                break;
-            default:
-                System.out.println(invalidCommand);
+        String command = Parser.parseInputToCommand(in);
+        String goodbye = "Munch. Hope to see you again soon!";
+        String invalidCommand = "Invalid/Missing Command! Feed me again!";
+        String invalidIndex = "Invalid/Missing Index! Feed me again!";
+        String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
+
+        switch (command) {
+        case "goodbye":
+            System.out.println(goodbye);
+            break;
+        case "list":
+            taskList.printListOfTasks();
+            break;
+        case "mark":
+            try {
+                int index = Parser.parseInputToIndex(in);
+                task = taskList.getTask(index);
+                task.mark();
+                System.out.println("Yay! I've marked this Food as eaten!\n" + task.toNewFormat());
+                storage.write(taskList);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println(invalidIndex);
             }
+            break;
+        case "unmark":
+            try {
+                int index = Parser.parseInputToIndex(in);
+                task = taskList.getTask(index);
+                task.unmark();
+                System.out.println("Okay! I've unmarked this Food as not eaten!\n" + task.toNewFormat());
+                storage.write(taskList);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println(invalidIndex);
+            }
+            break;
+        case "delete":
+            try {
+                int index = Parser.parseInputToIndex(in);
+                taskList.deleteTask(index);
+                taskList.printTotalTasks();
+                storage.write(taskList);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println(invalidIndex);
+            }
+            break;
+        case "find":
+            try {
+                String name = Parser.parseInputToName(in);
+                findTaskAndRespond(name, taskList);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(invalidNameOrFormat);
+            }
+            break;
+        case "task":
+            try {
+                ArrayList<String> result = Parser.parseInputToArrayOfTaskParameters(in);
+                task = returnTaskObject(result);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(invalidNameOrFormat);
+                break;
+            } catch (DateTimeParseException e) {
+                String invalidDate = "Invalid/Missing Date! Feed me again!";
+                System.out.println(invalidDate);
+                break;
+            }
+            taskList.addTask(task);
+            System.out.println("Got it. I've added this Food:\n" + task.toNewFormat());
+            storage.append(task);
+            taskList.printTotalTasks();
+            break;
+        default:
+            System.out.println(invalidCommand);
+        }
+    }
+
+    /**
+     * Method to handle the looping logic and reading user input
+     * @param br The BufferedReader to read from
+     * @param taskList The taskList to be modified
+     * @param storage The storage to be modified
+     * @throws IOException if the file cannot be written to
+     */
+    public void loopAndRespond(BufferedReader br, TaskList taskList, Storage storage) throws IOException {
+        String in = br.readLine();
+        while (in != null) {
+            handleCommand(in, taskList, storage);
             in = br.readLine();
         }
     }
