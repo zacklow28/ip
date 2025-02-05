@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image botImage = new Image(this.getClass().getResourceAsStream("/images/charmander.png"));
+    private boolean isInitialized = false;
 
     /**
      * Sets up the GUI with a start message
@@ -57,14 +58,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         // Handle the file input and update the UI
-        String fileName = userInput.getText();
-        String fileResult = storage.setUsingString(taskList, fileName);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(fileName, userImage),
-                DialogBox.getBotDialog(fileResult, botImage)
-        );
-        userInput.clear();
-        if (fileResult.equals("Tummy set!") || fileResult.contains("Created a new stomach")) {
+        if (!isInitialized) {
+            String fileName = userInput.getText();
+            String fileResult = storage.setUsingString(taskList, fileName);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(fileName, userImage),
+                    DialogBox.getBotDialog(fileResult, botImage)
+            );
+            userInput.clear();
+            if (fileResult.equals("Tummy set!") || fileResult.contains("Created a new stomach")) {
+                isInitialized = true;
+                handleCommand();
+            }
+        } else {
             handleCommand();
         }
     }
@@ -74,6 +80,27 @@ public class MainWindow extends AnchorPane {
      */
     private void handleCommand() {
         userInput.setOnAction(event -> {
+            try {
+                // process commands
+                String userText = userInput.getText();
+                String dukeText = ui.handleCommand(userText, taskList, storage);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(userText, userImage),
+                        DialogBox.getBotDialog(dukeText, botImage)
+                );
+                // If the user types "bye", wait for 1 second before closing the stage
+                if (userText.equals("bye")) {
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1)); // 1-second delay
+                    pause.setOnFinished(e -> System.exit(0)); // Close the stage after the delay
+                    pause.play(); // Start the pause transition
+                }
+                userInput.clear();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        sendButton.setOnAction(event -> {
             try {
                 // process commands
                 String userText = userInput.getText();
