@@ -21,25 +21,8 @@ public class TaskList {
     /**
      * Prints the total number of tasks
      */
-    public void printTotalTasks() {
-        System.out.printf("Now you have %s Food in my tummy.\n", this.getSize());
-    }
-
-    /**
-     * Prints the total number of tasks
-     */
     public String getTotalTasks() {
         return String.format("Now you have %s Food in my tummy.\n", this.getSize());
-    }
-
-    /**
-     * Prints a string of the list of tasks
-     */
-    public void printListOfTasks() {
-        System.out.println("Here are the Food in my tummy: ");
-        for (int i = 1; i <= this.getSize(); i++) {
-            System.out.println(i + ": " + this.tasks.get(i - 1).toNewFormat());
-        }
     }
 
     @Override

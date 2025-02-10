@@ -49,16 +49,6 @@ public class Parser {
     }
 
     /**
-     * Parses user input that includes the name into the task name
-     * @param in user input
-     * @return String name
-     */
-    public static String parseInputToName(String in) {
-        String[] inArr = in.split(" "); //split just on the first space
-        return inArr[1];
-    }
-
-    /**
      * Parses user input that includes a type of task into an array list
      * @param in user input
      * @return ArrayList of strings, each string is a part of the task. [0] is type of task, [1] is the name etc.

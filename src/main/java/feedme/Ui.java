@@ -130,21 +130,6 @@ public class Ui {
     }
 
     /**
-     * Method to handle the looping logic and reading user input
-     * @param br The BufferedReader to read from
-     * @param taskList The taskList to be modified
-     * @param storage The storage to be modified
-     * @throws IOException if the file cannot be written to
-     */
-    public void loopAndRespond(BufferedReader br, TaskList taskList, Storage storage) throws IOException {
-        String in = br.readLine();
-        while (in != null) {
-            System.out.println(handleCommand(in, taskList, storage));
-            in = br.readLine();
-        }
-    }
-
-    /**
      * Processes the user input that includes a type of task into a task object
      * @param result user input
      * @return Task task to be added into the tasklist
