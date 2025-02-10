@@ -24,7 +24,11 @@ public class Parser {
             return "unmark";
         } else if (inArr[0].equals("delete")) {
             return "delete";
-        } else if (inArr[0].equals("todo") || inArr[0].equals("deadline") || inArr[0].equals("event")) {
+        } else if (inArr[0].equals("todo")) {
+            return "task";
+        } else if (inArr[0].equals("deadline")) {
+            return "task";
+        } else if (inArr[0].equals("event")) {
             return "task";
         } else if (inArr[0].equals("find")) {
             return "find";
@@ -40,7 +44,8 @@ public class Parser {
      */
     public static int parseInputToIndex(String in) {
         String[] inArr = in.split(" ", 2); //split just on the first space
-        return Integer.parseInt(inArr[1]) - 1;
+        int inputNumber = Integer.parseInt(inArr[1]);
+        return inputNumber - 1; //index starts from 0
     }
 
     /**
@@ -59,21 +64,25 @@ public class Parser {
      * @return ArrayList of strings, each string is a part of the task. [0] is type of task, [1] is the name etc.
      */
     public static ArrayList<String> parseInputToArrayOfTaskParameters(String in) {
-        String[] inArr = in.split(" ", 2);
+        String[] inArr = in.strip().split(" ", 2);
         ArrayList<String> outArr = new ArrayList<String>();
-        if (inArr[0].equals("todo")) {
-            outArr.add(inArr[0]);
+        assert inArr.length == 2;
+        String type = inArr[0];
+        outArr.add(type);
+
+        if (type.equals("todo")) {
             outArr.add(inArr[1]);
-        } else if (inArr[0].equals("deadline")) {
-            outArr.add(inArr[0]);
-            outArr.add(inArr[1].split(" /by ")[0]);
-            outArr.add(inArr[1].split(" /by ")[1]);
-        } else if (inArr[0].equals("event")) {
-            outArr.add(inArr[0]);
-            outArr.add(inArr[1].split(" /from ")[0]);
-            String input = inArr[1].split(" /from ")[1];
-            outArr.add(input.split(" /to ")[0]);
-            outArr.add(input.split(" /to ")[1]);
+        } else if (type.equals("deadline")) {
+            String[] inArrSplitDeadline = inArr[1].split(" /by ");
+            outArr.add(inArrSplitDeadline[0]);
+            outArr.add(inArrSplitDeadline[1]);
+        } else if (type.equals("event")) {
+            String[] inArrSplitEventFrom = inArr[1].split(" /from ");
+            outArr.add(inArrSplitEventFrom[0]);
+
+            String[] inArrSplitEventFromTo = inArrSplitEventFrom[1].split(" /to ");
+            outArr.add(inArrSplitEventFromTo[0]);
+            outArr.add(inArrSplitEventFromTo[1]);
         }
         return outArr;
     }

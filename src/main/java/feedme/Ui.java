@@ -15,7 +15,12 @@ import feedme.task.ToDo;
  * Ui class that deals with interactions with the user
  */
 public class Ui {
-
+    private static final String GOODBYE = "Munch. Hope to see you again soon!";
+    private static final String INVALID_COMMAND = "Invalid/Missing Command! Feed me again!";
+    private static final String INVALID_INDEX = "Invalid/Missing Index! Feed me again!";
+    private static final String INVALID_NAME_OR_FORMAT = "Invalid/Missing Parameter or Format! Feed me again!";
+    private static final String INVALID_INPUT = "Invalid/Missing Input! Feed me again!";
+    private static final String INVALID_DATE = "Invalid/Missing Date! Feed me again!";
     /**
      * Prints a greeting message to the user
      */
@@ -33,77 +38,94 @@ public class Ui {
      * @throws IOException if the file cannot be written to
      */
     public String handleCommand(String in, TaskList taskList, Storage storage) throws IOException {
-        Task task;
         String command = Parser.parseInputToCommand(in);
-        String goodbye = "Munch. Hope to see you again soon!";
-        String invalidCommand = "Invalid/Missing Command! Feed me again!";
-        String invalidIndex = "Invalid/Missing Index! Feed me again!";
-        String invalidNameOrFormat = "Invalid/Missing Parameter or Format! Feed me again!";
-        String invalidInput = "Invalid/Missing Input! Feed me again!";
 
         switch (command) {
         case "goodbye":
-            return goodbye;
+            return GOODBYE;
         case "list":
             return taskList.toString();
         case "mark":
-            try {
-                int index = Parser.parseInputToIndex(in);
-                task = taskList.getTask(index);
-                task.mark();
-                String output = "Yay! I've marked this Food as eaten!\n" + task.toNewFormat();
-                storage.write(taskList);
-                return output;
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                return invalidIndex;
-            } catch (IOException e) {
-                return invalidInput;
-            }
+            return handleMarkCommand(in, taskList, storage);
         case "unmark":
-            try {
-                int index = Parser.parseInputToIndex(in);
-                task = taskList.getTask(index);
-                task.unmark();
-                String output = "Okay! I've unmarked this Food as not eaten!\n" + task.toNewFormat();
-                storage.write(taskList);
-                return output;
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                return invalidIndex;
-            } catch (IOException e) {
-                return invalidInput;
-            }
+            return handleUnmarkCommand(in, taskList, storage);
         case "delete":
-            try {
-                int index = Parser.parseInputToIndex(in);
-                String output = taskList.deleteTask(index);
-                storage.write(taskList);
-                return output + "\n" + taskList.getTotalTasks();
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                return invalidIndex;
-            } catch (IOException e) {
-                return invalidInput;
-            }
+            return handleDeleteCommand(in, taskList, storage);
         case "find":
-            try {
-                String[] names = in.split(" ");
-                return findTaskAndRespond(taskList, names);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return invalidNameOrFormat;
-            }
+            return handleFindCommand(in, taskList);
         case "task":
-            try {
-                ArrayList<String> result = Parser.parseInputToArrayOfTaskParameters(in);
-                task = returnTaskObject(result);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return invalidNameOrFormat;
-            } catch (DateTimeParseException e) {
-                return "Invalid/Missing Date! Feed me again!";
-            }
-            taskList.addTask(task);
-            storage.append(task);
-            return "Got it. I've added this Food:\n" + task.toNewFormat();
+            return handleTaskCommand(in, taskList, storage);
         default:
-            return invalidCommand;
+            return INVALID_COMMAND;
+        }
+    }
+
+    private String handleTaskCommand(String in, TaskList taskList, Storage storage) throws IOException {
+        Task task;
+        try {
+            ArrayList<String> result = Parser.parseInputToArrayOfTaskParameters(in);
+            task = returnTaskObject(result);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return INVALID_NAME_OR_FORMAT;
+        } catch (DateTimeParseException e) {
+            return INVALID_DATE;
+        }
+        taskList.addTask(task);
+        storage.append(task);
+        return "Got it. I've added this Food:\n" + task.toNewFormat();
+    }
+
+    private String handleFindCommand(String in, TaskList taskList) {
+        try {
+            String[] names = in.split(" ");
+            return findTaskAndRespond(taskList, names);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return INVALID_NAME_OR_FORMAT;
+        }
+    }
+
+    private static String handleDeleteCommand(String in, TaskList taskList, Storage storage) {
+        try {
+            int index = Parser.parseInputToIndex(in);
+            String output = taskList.deleteTask(index);
+            storage.write(taskList);
+            return output + "\n" + taskList.getTotalTasks();
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return INVALID_INDEX;
+        } catch (IOException e) {
+            return INVALID_INPUT;
+        }
+    }
+
+    private static String handleUnmarkCommand(String in, TaskList taskList, Storage storage) {
+        Task task;
+        try {
+            int index = Parser.parseInputToIndex(in);
+            task = taskList.getTask(index);
+            task.unmark();
+            String output = "Okay! I've unmarked this Food as not eaten!\n" + task.toNewFormat();
+            storage.write(taskList);
+            return output;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return INVALID_INDEX;
+        } catch (IOException e) {
+            return INVALID_INPUT;
+        }
+    }
+
+    private static String handleMarkCommand(String in, TaskList taskList, Storage storage) {
+        Task task;
+        try {
+            int index = Parser.parseInputToIndex(in);
+            task = taskList.getTask(index);
+            task.mark();
+            String output = "Yay! I've marked this Food as eaten!\n" + task.toNewFormat();
+            storage.write(taskList);
+            return output;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return INVALID_INDEX;
+        } catch (IOException e) {
+            return INVALID_INPUT;
         }
     }
 
