@@ -1,4 +1,4 @@
-# feedme.FeedMe project template
+# feedme.Launcher project template
 
 This is a project template for a greenfield Java project. It's called FeedMe. Given below are instructions on how to use it.
 
@@ -18,6 +18,7 @@ Prerequisites: JDK 17, update Intellij to the most recent version.
 ```
 Hello! I'm FeedMe.
 What can I do for you?
+Tummy path (with extension) :
 ```
 
 

@@ -52,7 +52,7 @@ checkstyle {
 }
 
 shadowJar {
-    mainClassName = "feedme.FeedMe"
+    mainClassName = "feedme.Launcher"
     archiveBaseName = "feedme"
     archiveClassifier = null
 }
