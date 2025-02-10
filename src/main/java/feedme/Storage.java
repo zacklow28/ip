@@ -88,36 +88,6 @@ public class Storage {
     /**
      * Sets the stomach. Reads from a file and either retrieves past tasks or creates a new stomach for the user
      * @param taskList The taskList to add tasks to
-     * @param br The bufferedReader to read from
-     * @throws IOException if the file cannot be read
-     */
-    public void setUsingBufferedReader(TaskList taskList, BufferedReader br) throws IOException {
-        System.out.println("Tummy path (with extension) : ");
-        String filePath = br.readLine();
-        //read from file
-        while (filePath != null) {
-            try {
-                this.retrieveFrom(taskList, filePath);
-                break;
-            } catch (FileNotFoundException e) {
-                System.out.println("Tummy location not found.");
-                this.initialize(filePath);
-                break;
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Invalid/Missing content! Feed me again!");
-                filePath = br.readLine();
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid/Missing Date! Feed me again!");
-                filePath = br.readLine();
-            }
-
-        }
-        System.out.println("Tummy set!");
-    }
-
-    /**
-     * Sets the stomach. Reads from a file and either retrieves past tasks or creates a new stomach for the user
-     * @param taskList The taskList to add tasks to
      * @param string The path of the file
      * @throws IOException if the file cannot be read
      */
