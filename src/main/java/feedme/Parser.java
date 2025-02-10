@@ -61,6 +61,9 @@ public class Parser {
     public static ArrayList<String> parseInputToArrayOfTaskParameters(String in) {
         String[] inArr = in.split(" ", 2);
         ArrayList<String> outArr = new ArrayList<String>();
+        //assumption that the input is a valid task input
+        assert inArr[0].equals("todo") || inArr[0].equals("deadline") || inArr[0].equals("event") : "Invalid input!";
+
         if (inArr[0].equals("todo")) {
             outArr.add(inArr[0]);
             outArr.add(inArr[1]);
