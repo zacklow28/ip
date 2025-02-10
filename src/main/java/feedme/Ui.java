@@ -138,6 +138,8 @@ public class Ui {
      */
     public Task returnTaskObject(ArrayList<String> result)
             throws ArrayIndexOutOfBoundsException, DateTimeParseException {
+
+        assert result.size() > 0 : "Missing Task Fields";
         String type = result.get(0);
         Task task;
         if (type.equals("todo")) {
@@ -167,6 +169,8 @@ public class Ui {
         if (newTaskList.getSize() == 0) {
             return "No matches found in my tummy!";
         } else {
+            //assumes at least one match
+            assert newTaskList.getSize() > 0 : "No matches found in my tummy!";
             return newTaskList.toString();
         }
     }

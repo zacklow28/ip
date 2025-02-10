@@ -56,11 +56,13 @@ public class Parser {
     public static ArrayList<String> parseInputToArrayOfTaskParameters(String in) {
         String[] inArr = in.strip().split(" ", 2);
         ArrayList<String> outArr = new ArrayList<String>();
-        assert inArr.length == 2;
+
+        assert inArr.length == 2 : "Invalid input!";
+        //assumption that the input is a valid task input
+        assert inArr[0].equals("todo") || inArr[0].equals("deadline") || inArr[0].equals("event") : "Invalid input!";
         String type = inArr[0];
         outArr.add(type);
-
-        if (type.equals("todo")) {
+        if (inArr[0].equals("todo")) {
             outArr.add(inArr[1]);
         } else if (type.equals("deadline")) {
             String[] inArrSplitDeadline = inArr[1].split(" /by ");
