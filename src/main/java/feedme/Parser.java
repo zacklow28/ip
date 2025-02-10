@@ -62,7 +62,7 @@ public class Parser {
         assert inArr[0].equals("todo") || inArr[0].equals("deadline") || inArr[0].equals("event") : "Invalid input!";
         String type = inArr[0];
         outArr.add(type);
-        if (inArr[0].equals("todo")) {
+        if (type.equals("todo")) {
             outArr.add(inArr[1]);
         } else if (type.equals("deadline")) {
             String[] inArrSplitDeadline = inArr[1].split(" /by ");
