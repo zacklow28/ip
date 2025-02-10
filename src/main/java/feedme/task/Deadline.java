@@ -39,6 +39,14 @@ public class Deadline extends Task {
     }
 
     /**
+     *  Sets the date of the task
+     *  @param date String date
+     */
+    public void setBy(String date) {
+        this.dueDate = LocalDate.parse(date);
+    }
+
+    /**
      *  Returns string in format "[E]name by: YYYY-MM-DD"
      * @return String representation
      */

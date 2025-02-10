@@ -21,6 +21,7 @@ public class Ui {
     private static final String INVALID_NAME_OR_FORMAT = "Invalid/Missing Parameter or Format! Feed me again!";
     private static final String INVALID_INPUT = "Invalid/Missing Input! Feed me again!";
     private static final String INVALID_DATE = "Invalid/Missing Date! Feed me again!";
+
     /**
      * Prints a greeting message to the user
      */
@@ -55,11 +56,21 @@ public class Ui {
             return handleFindCommand(in, taskList);
         case "task":
             return handleTaskCommand(in, taskList, storage);
+        case "edit":
+            return handleEditCommand(in, taskList, storage);
         default:
             return INVALID_COMMAND;
         }
     }
 
+    /**
+     * Processes the user input to add a type of task
+     * @param in user input
+     * @param taskList tasklist to be modified
+     * @param storage storage to be modified
+     * @return String to be printed
+     * @throws IOException if the file cannot be written to
+     */
     private String handleTaskCommand(String in, TaskList taskList, Storage storage) throws IOException {
         Task task;
         try {
@@ -75,6 +86,12 @@ public class Ui {
         return "Got it. I've added this Food:\n" + task.toNewFormat();
     }
 
+    /**
+     * Processes the user input to find a task
+     * @param in user input
+     * @param taskList tasklist to be searched
+     * @return String to be printed
+     */
     private String handleFindCommand(String in, TaskList taskList) {
         try {
             String[] names = in.split(" ");
@@ -84,6 +101,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Processes the user input to delete a task
+     * @param in user input
+     * @param taskList tasklist to be modified
+     * @param storage storage to be modified
+     * @return String to be printed
+     */
     private static String handleDeleteCommand(String in, TaskList taskList, Storage storage) {
         try {
             int index = Parser.parseInputToIndex(in);
@@ -97,6 +121,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Processes the user input to unmark a task
+     * @param in user input
+     * @param taskList tasklist to be modified
+     * @param storage storage to be modified
+     * @return String to be printed
+     */
     private static String handleUnmarkCommand(String in, TaskList taskList, Storage storage) {
         Task task;
         try {
@@ -113,6 +144,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Processes the user input to mark a task
+     * @param in user input
+     * @param taskList tasklist to be modified
+     * @param storage storage to be modified
+     * @return String to be printed
+     */
     private static String handleMarkCommand(String in, TaskList taskList, Storage storage) {
         Task task;
         try {
@@ -126,6 +164,35 @@ public class Ui {
             return INVALID_INDEX;
         } catch (IOException e) {
             return INVALID_INPUT;
+        }
+    }
+
+    /**
+     * Processes the user input to edit a task
+     * @param in user input
+     * @param taskList tasklist to be modified
+     * @param storage storage to be modified
+     * @return String to be printed
+     */
+    private static String handleEditCommand(String in, TaskList taskList, Storage storage) {
+        try {
+            String[] fields = in.split(" "); //edit, index, field, new value
+            int index = Integer.parseInt(fields[1]) - 1;
+            if (fields.length < 4) { //if not 4, means missing a field
+                throw new IllegalArgumentException();
+            }
+            taskList.editTask(index, fields[2], fields[3]);
+            String output = "Yay! I've edited this Food!\n" + taskList.getTask(index).toNewFormat();
+            storage.write(taskList);
+            return output;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return INVALID_INDEX;
+        } catch (IOException e) {
+            return INVALID_INPUT;
+        } catch (IllegalArgumentException e) {
+            return INVALID_NAME_OR_FORMAT;
+        } catch (DateTimeParseException e) {
+            return INVALID_DATE;
         }
     }
 
