@@ -54,11 +54,27 @@ public class Event extends Task {
     }
 
     /**
+     * Sets start date
+     * @param startDate start date
+     */
+    public void setFrom(String startDate) {
+        this.startDate = LocalDate.parse(startDate);
+    }
+
+    /**
      * Returns end date
      * @return String end date
      */
     public String getEndDate() {
         return this.endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    /**
+     * Sets end date
+     * @param endDate end date
+     */
+    public void setTo(String endDate) {
+        this.endDate = LocalDate.parse(endDate);
     }
 
     /**

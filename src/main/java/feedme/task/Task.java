@@ -48,6 +48,14 @@ public class Task {
     }
 
     /**
+     * Sets name of task to a new name
+     * @param name name of task
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Returns task in format "[ ] name"
      * @return String representation
      */

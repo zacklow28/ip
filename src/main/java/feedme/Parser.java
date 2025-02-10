@@ -32,6 +32,8 @@ public class Parser {
             return "task";
         } else if (inArr[0].equals("find")) {
             return "find";
+        } else if (inArr[0].equals("edit")) {
+            return "edit";
         } else {
             return "invalid";
         }

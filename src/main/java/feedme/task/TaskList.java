@@ -67,4 +67,34 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    /**
+     * Edits a task in the list
+     * @param index The index of the task in the array list
+     * @param field The field to be edited
+     * @param newValue The new value of the field
+     */
+    public void editTask(int index, String field, String newValue) {
+        Task task = this.getTask(index);
+        // Handle common "name" field for all task types
+        if (field.equals("name")) {
+            task.setName(newValue);
+            return;
+        } else if (task instanceof Deadline deadlineTask) {
+            if (field.equals("by")) {
+                deadlineTask.setBy(newValue);
+                return;
+            }
+        } else if (task instanceof Event eventTask) {
+            if (field.equals("from")) {
+                eventTask.setFrom(newValue);
+                return;
+            } else if (field.equals("to")) {
+                eventTask.setTo(newValue);
+                return;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 }
+
+
