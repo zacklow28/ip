@@ -176,13 +176,15 @@ public class Ui {
      */
     private static String handleEditCommand(String in, TaskList taskList, Storage storage) {
         try {
-            String[] fields = in.split(" "); //edit, index, field, new value
+            String[] fields = in.split(" ", 4); //edit, index, field, new value
             int index = Integer.parseInt(fields[1]) - 1;
             if (fields.length < 4) { //if not 4, means missing a field
                 throw new IllegalArgumentException();
             }
+            String originalName = taskList.getTask(index).toNewFormat();
             taskList.editTask(index, fields[2], fields[3]);
-            String output = "Yay! I've edited this Food!\n" + taskList.getTask(index).toNewFormat();
+            String output = "Yay! I've edited this Food!\n"
+                   + originalName + " -> " + taskList.getTask(index).toNewFormat();
             storage.write(taskList);
             return output;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
