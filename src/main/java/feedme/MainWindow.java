@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getBotDialog(fileResult, botImage)
             );
             userInput.clear();
-            if (fileResult.equals("Tummy set!") || fileResult.contains("Created a new stomach")) {
+            if (fileResult.equals("Tummy set!") || fileResult.contains("Created a new tummy")) {
                 isInitialized = true;
                 handleCommand();
             }

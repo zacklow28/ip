@@ -21,7 +21,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Initializes a new stomach. Creates a new file if it doesn't exist
+     * Initializes a new tummy. Creates a new file if it doesn't exist
      * @param filePath The path of the file
      * @throws IOException if the file cannot be created
      */
@@ -30,7 +30,7 @@ public class Storage {
             File file = new File(filePath);
             if (!file.exists()) {
                 file.createNewFile();
-                return "Created a new stomach at: " + filePath;
+                return "Created a new tummy at: " + filePath;
             }
             this.filePath = filePath;
             return "found";
@@ -86,7 +86,7 @@ public class Storage {
     }
 
     /**
-     * Sets the stomach. Reads from a file and either retrieves past tasks or creates a new stomach for the user
+     * Sets the tummy. Reads from a file and either retrieves past tasks or creates a new tummy for the user
      * @param taskList The taskList to add tasks to
      * @param string The path of the file
      * @throws IOException if the file cannot be read
@@ -115,7 +115,7 @@ public class Storage {
     }
 
     /**
-     * Appends a task to the stomach. Writes to the end of the file
+     * Appends a task to the tummy. Writes to the end of the file
      * @param task The task to append
      * @throws IOException if the file cannot be written to
      */
@@ -126,7 +126,7 @@ public class Storage {
     }
 
     /**
-     * Writes the taskList to the stomach. Overwrites the file
+     * Writes the taskList to the tummy. Overwrites the file
      * @param taskList The taskList to write
      * @throws IOException if the file cannot be written to
      */

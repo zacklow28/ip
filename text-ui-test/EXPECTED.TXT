@@ -1,8 +1,8 @@
 Hello! I'm FeedMe.
 What can I do for you?
-Tummy path (with extension) : 
+Tummy path (with extension) :
 Tummy location not found.
-Created a new stomach at: Output.txt
+Created a new tummy at: Output.txt
 Tummy set!
 Got it. I've added this Food:
 [T][ ] borrow book
