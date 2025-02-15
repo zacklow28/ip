@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Handle the command logic for each individual input and respond to the user
+     * Handles the command logic for each individual input and respond to the user
      * @param in user input
      * @param taskList taskList to be modified
      * @param storage storage to be modified
