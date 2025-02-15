@@ -1,6 +1,6 @@
 # FeedMe User Guide
 
-![GUI screenshot](/docs/Ui.png)
+![GUI screenshot](https://zacklow28.github.io/ip/Ui.png)
 
 This is a Bot that helps you keep track of your tasks. It functions as if these tasks are yummy food being fed to it. 
 It **first asks you for a file** that contains your tasks. It then allows you to add, delete, mark, unmark, find and edit tasks. 
