@@ -3,8 +3,24 @@
 ![GUI screenshot](https://zacklow28.github.io/ip/Ui.png)
 
 This is a Bot that helps you keep track of your tasks. It functions as if these tasks are yummy food being fed to it. 
-It **first asks you for a file** that contains your tasks. It then allows you to add, delete, mark, unmark, find and edit tasks. 
-If no such file exists, it will create a new "tummy" which will be your new file.
+It **first asks you for a file** that contains your tasks. It then allows you to add, delete, mark, unmark, find and edit tasks.
+
+## On starting the application:
+
+The application will ask you for the path of the file that contains your tasks. 
+If the file exists, it will set the tasks in the file as the tasks in the tummy. Otherwise, it will create a new tummy at
+the specified path and this will be the file to set the tasks.
+
+If input `Documents\feedme.txt` and file exists:
+```
+Tummy set!
+
+```
+If input `Documents\feedme.txt` and file does not exist:
+```
+Tummy location not found.
+Created a new tummy at: Documents\feedme.txt
+```
 
 ## Listing all tasks: `list`
 
@@ -133,4 +149,13 @@ Example 2: `edit 2 by 2020-02-28`
 ```
 Yay! I've edited this Food!
 [D][ ] eat snacks by: Jan 01 2001 -> [D][ ] eat snacks by: Feb 28 2020
+```
+## Exit: `exit`
+
+Exit the program. No extra parameters required. Introduced a small delay of 0.5 seconds before the application closes.
+
+Example: `exit`
+
+```
+Munch. Hope to see you again soon!
 ```
